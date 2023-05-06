@@ -12,7 +12,7 @@ class TinderViewModel (
         ): ViewModel() {
 
     private val _books = MutableLiveData<List<Book>>()
-    val posts = _books.share()
+    val books = _books.share()
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
@@ -23,6 +23,10 @@ class TinderViewModel (
 
     init {
         //todo
+    }
+
+    fun getSize(): Int {
+        return _books.value?.size ?: 0
     }
 
     data class State(

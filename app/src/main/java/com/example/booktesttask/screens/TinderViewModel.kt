@@ -1,11 +1,15 @@
 package com.example.booktesttask.screens
 
+import android.content.Context
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.book.BookListener
 import com.example.booktesttask.models.book.BookRepository
 import com.example.booktesttask.utils.share
+import com.yuyakaido.android.cardstackview.Direction
 
 class TinderViewModel (
     private val bookRepository: BookRepository
@@ -22,9 +26,12 @@ class TinderViewModel (
     }
 
     init {
-        //todo
+        bookRepository.addListener(listener)
     }
 
+    fun directionToast(context: Context ,direction: Direction) {
+        Toast.makeText(context, "Direction $direction", Toast.LENGTH_SHORT).show()
+    }
     fun getSize(): Int {
         return _books.value?.size ?: 0
     }

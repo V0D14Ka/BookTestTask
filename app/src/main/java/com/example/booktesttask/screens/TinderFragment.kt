@@ -29,31 +29,28 @@ class TinderFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTinderBinding.inflate(inflater, container, false)
+        adapter = BookAdapter()
         manager = CardStackLayoutManager(requireContext(), object: CardStackListener{
             override fun onCardDragging(direction: Direction?, ratio: Float) {
-                TODO("Not yet implemented")
             }
 
             override fun onCardSwiped(direction: Direction?) {
+                viewModel.directionToast(context!!, direction!!)
                 if (manager.topPosition == viewModel.getSize()) {
                     Toast.makeText(requireContext(), "Last card", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onCardRewound() {
-                TODO("Not yet implemented")
             }
 
             override fun onCardCanceled() {
-                TODO("Not yet implemented")
             }
 
             override fun onCardAppeared(view: View?, position: Int) {
-                TODO("Not yet implemented")
             }
 
             override fun onCardDisappeared(view: View?, position: Int) {
-                TODO("Not yet implemented")
             }
 
         })
@@ -61,11 +58,13 @@ class TinderFragment: Fragment() {
         manager.setVisibleCount(3)
         manager.setTranslationInterval(0.6f)
         manager.setScaleInterval(0.8f)
+        manager.setDirections(Direction.FREEDOM)
+        binding.cardStackView.layoutManager = manager
+        binding.cardStackView.adapter = adapter
+        binding.cardStackView.itemAnimator = DefaultItemAnimator()
 
         observeChanges()
-        binding.cardStackView.layoutManager = manager
-        binding.cardStackView.adapter = BookAdapter()
-        binding.cardStackView.itemAnimator = DefaultItemAnimator()
+
         return binding.root
     }
 

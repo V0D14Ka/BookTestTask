@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booktesttask.R
 import com.example.booktesttask.databinding.ItemBookBinding
-import com.yuyakaido.android.cardstackview.CardStackView
 
 class BookAdapter: RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     class BookViewHolder(
@@ -22,9 +21,6 @@ class BookAdapter: RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemBookBinding.inflate(inflater, parent, false)
-
-//        binding.root.setOnClickListener(this)
-//        binding.moreImageViewButton.setOnClickListener(this)
 
         return BookViewHolder(binding)
     }

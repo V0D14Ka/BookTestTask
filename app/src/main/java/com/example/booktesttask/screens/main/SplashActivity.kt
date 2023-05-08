@@ -1,4 +1,4 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle

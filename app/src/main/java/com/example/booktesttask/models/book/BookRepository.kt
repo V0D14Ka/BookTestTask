@@ -3,6 +3,9 @@ package com.example.booktesttask.models.book;
 import android.content.Context
 import android.util.Log
 import com.example.booktesttask.models.Repository
+import com.example.booktesttask.utils.BackendException
+import com.example.booktesttask.utils.InvalidCredentialsException
+import com.example.booktesttask.utils.InvalidInputException
 import com.github.javafaker.App
 import com.github.javafaker.Faker
 
@@ -15,7 +18,7 @@ class BookRepository private constructor(context: Context, private val bookSourc
     private val listeners = mutableListOf<BookListener>()
     private val genres = mutableListOf<String>()
 
-    init {
+    private fun offlineInit() {
         val faker = Faker.instance()
         IMAGES.shuffle()
         books = (1..10).map {
@@ -41,27 +44,92 @@ class BookRepository private constructor(context: Context, private val bookSourc
     suspend fun like(item: Book) {
         deleteBook(item)
         notifyChanges()
-        bookSource.like(item.id)
+        try {
+            bookSource.like(item.id)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
+
     }
 
     suspend fun dislike(item: Book) {
         deleteBook(item)
         notifyChanges()
-        bookSource.dislike(item.id)
+        try {
+            bookSource.dislike(item.id)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
     }
 
     suspend fun alreadyRead(item: Book) {
         deleteBook(item)
         notifyChanges()
-        bookSource.alreadyRead(item.id)
+        try {
+            bookSource.alreadyRead(item.id)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
     }
 
     suspend fun skip(item: Book) {
         deleteBook(item)
         notifyChanges()
-        bookSource.skip(item.id)
+        try {
+            bookSource.skip(item.id)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
     }
 
+    suspend fun getRecommendations() {
+        try {
+            books = bookSource.getRecommendations().toMutableList()
+        } catch (e: Exception) {
+//            offlineInit()
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
+    }
+
+    fun addBook(item: Book) {
+        books.add(item)
+        notifyChanges()
+    }
     fun addGenre(g: String){
         genres.add(genres.size,g)
     }
@@ -72,7 +140,18 @@ class BookRepository private constructor(context: Context, private val bookSourc
     }
 
     suspend fun confirmGenres() {
-        bookSource.genreUpdated(genres)
+        try {
+            bookSource.genreUpdated(genres)
+        } catch (e: Exception) {
+            if (e is BackendException && e.code == 401) {
+                throw InvalidCredentialsException(e)
+            }
+            if (e is BackendException && e.code == 400) {
+                throw InvalidInputException(e)
+            } else {
+                throw e
+            }
+        }
     }
 
     fun deleteBook(genre: String){

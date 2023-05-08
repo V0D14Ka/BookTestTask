@@ -6,4 +6,6 @@ import com.example.booktesttask.models.user.UserSource
 interface SourcesProvider {
 //    fun getUsersSource(): UserSource
     fun getBookSource(): BookSource
+
+    fun getUserSource(): UserSource
 }

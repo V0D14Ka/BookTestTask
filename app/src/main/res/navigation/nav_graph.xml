@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.booktesttask.screens.InfoFragment"
+        android:name="com.example.booktesttask.screens.info.InfoFragment"
         android:label="Статистика" />
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.booktesttask.screens.StartFragment"
+        android:name="com.example.booktesttask.screens.start.StartFragment"
         android:label="Приветствие" />
     <fragment
         android:id="@+id/tinderFragment"
-        android:name="com.example.booktesttask.screens.TinderFragment"
+        android:name="com.example.booktesttask.screens.tinder.TinderFragment"
         android:label="Рекомендации" />
 </navigation>

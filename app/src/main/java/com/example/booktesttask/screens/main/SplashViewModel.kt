@@ -1,4 +1,4 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

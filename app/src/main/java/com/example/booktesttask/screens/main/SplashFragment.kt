@@ -1,13 +1,11 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.main
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.booktesttask.App
 import com.example.booktesttask.R
 import com.example.booktesttask.databinding.FragmentSplashBinding
 import com.example.booktesttask.utils.factory

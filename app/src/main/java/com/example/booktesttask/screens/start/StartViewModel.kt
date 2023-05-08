@@ -1,4 +1,4 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.start
 
 import androidx.lifecycle.ViewModel
 

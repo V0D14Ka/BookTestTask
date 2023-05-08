@@ -1,17 +1,11 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.main
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.booktesttask.App
 import com.example.booktesttask.R
 import com.example.booktesttask.databinding.ActivityMainBinding
 import java.util.regex.Pattern

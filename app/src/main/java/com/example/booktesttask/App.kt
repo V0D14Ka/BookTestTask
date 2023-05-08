@@ -17,6 +17,6 @@ class App : Application() {
         SharedPreferencesAppSettings.init(this)
         sourcesProvider = SourceProviderHolder.sourcesProvider
         BookRepository.init(this, sourcesProvider.getBookSource())
-        UserRepository.init(this)
+        UserRepository.init(this, sourcesProvider.getUserSource())
     }
 }

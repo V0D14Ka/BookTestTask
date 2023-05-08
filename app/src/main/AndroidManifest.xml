@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.example.booktesttask.screens.SplashActivity"
+            android:name="com.example.booktesttask.screens.main.SplashActivity"
             android:theme="@style/SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -28,6 +28,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screens.MainActivity" />
+        <activity android:name=".screens.main.MainActivity" />
     </application>
 </manifest>

@@ -1,7 +1,6 @@
-package com.example.booktesttask.screens
+package com.example.booktesttask.screens.tinder
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.example.booktesttask.R
 import com.example.booktesttask.databinding.FragmentTinderBinding
 import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.book.BookAdapter
 import com.example.booktesttask.utils.factory
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
-import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.StackFrom
 import com.yuyakaido.android.cardstackview.SwipeableMethod
-import com.yuyakaido.android.cardstackview.internal.CardStackDataObserver
 
 class TinderFragment: Fragment() {
     private lateinit var binding: FragmentTinderBinding
@@ -37,6 +33,7 @@ class TinderFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTinderBinding.inflate(inflater, container, false)
+        binding.tryAgainButton.setOnClickListener{ viewModel.getRecommendations() }
         adapter = BookAdapter()
         manager = CardStackLayoutManager(requireContext(), object: CardStackListener{
             override fun onCardDragging(direction: Direction?, ratio: Float) {
@@ -45,7 +42,7 @@ class TinderFragment: Fragment() {
             override fun onCardSwiped(direction: Direction?) {
                 viewModel.directionToast(context!!, direction!!)
                 viewModel.event(direction, item!!)
-                Toast.makeText(context, "Author ${item?.isLiked}, ${item?.id}", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Author ${item?.isLiked}, ${item?.id}", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCardRewound() {
@@ -76,7 +73,7 @@ class TinderFragment: Fragment() {
         binding.cardStackView.layoutManager = manager
         binding.cardStackView.adapter = adapter
         binding.cardStackView.itemAnimator = DefaultItemAnimator()
-
+        observeState()
         observeChanges()
 
         return binding.root
@@ -84,5 +81,11 @@ class TinderFragment: Fragment() {
 
     private fun observeChanges() = viewModel.books.observe(viewLifecycleOwner) {
         adapter.books = it
+    }
+
+    private fun observeState() = viewModel.state.observe(viewLifecycleOwner) {
+        binding.tryAgainContainer.visibility = if(it.apiFailInfo) View.VISIBLE else View.INVISIBLE
+//        binding.noUsersTextView.visibility = if(it.emptyList && !it.apiFailInfo) View.VISIBLE else View.INVISIBLE
+        binding.progressBar.visibility = if (it.showProgress) View.VISIBLE else View.INVISIBLE
     }
 }

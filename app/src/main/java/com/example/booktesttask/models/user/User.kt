@@ -6,7 +6,9 @@ data class User(
     val email: String?,
     val phone: String,
     val avatar: String,
-    val favorite_adverts: Array<String>?,
+    val favorite_books: Array<String>?,
+    val dislike_books: Array<String>?,
+    val already_read_books: Array<String>?,
     val createdAt: Long = UNKNOWN_CREATED_AT
 ) {
     companion object {

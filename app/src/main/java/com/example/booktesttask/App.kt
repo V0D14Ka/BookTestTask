@@ -11,7 +11,6 @@ import com.example.booktesttask.sources.SourcesProvider
 
 class App : Application() {
     private lateinit var sourcesProvider: SourcesProvider
-    // --- repositories
     override fun onCreate() {
         super.onCreate()
         SharedPreferencesAppSettings.init(this)

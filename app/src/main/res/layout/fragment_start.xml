@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Как рулить?"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_red_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/likeView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.252"
+        app:srcCompat="@drawable/ic_item_heart" />
+
+    <ImageView
+        android:id="@+id/dislikeView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/likeView"
+        app:layout_constraintTop_toBottomOf="@id/likeView"
+        app:srcCompat="@drawable/ic_dislike" />
+
+    <ImageView
+        android:id="@+id/alreadyreadView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/dislikeView"
+        app:layout_constraintTop_toBottomOf="@id/dislikeView"
+        app:srcCompat="@drawable/ic_already_read" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="@id/alreadyreadView"
+        app:layout_constraintTop_toBottomOf="@id/alreadyreadView"
+        app:srcCompat="@drawable/ic_not_interested" />
+
+    <TextView
+        android:id="@+id/likeText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/liketext"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guide"
+        app:layout_constraintTop_toTopOf="@+id/likeView" />
+
+    <TextView
+        android:id="@+id/dislikeText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/disliketext"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="@id/likeText"
+        app:layout_constraintTop_toTopOf="@+id/dislikeView" />
+
+    <TextView
+        android:id="@+id/alreadyText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/alreadytext"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="@id/dislikeText"
+        app:layout_constraintTop_toTopOf="@+id/alreadyreadView" />
+
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/skiptext"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="@id/alreadyText"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

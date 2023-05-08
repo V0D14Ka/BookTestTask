@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/startFragment"
-        android:title="Приветствие"
+        android:title="Подсказки"
         android:icon="@drawable/ic_info"/>
 
     <item android:id="@+id/tinderFragment"
-        android:title="Рекомендации"
+        android:title="Книги"
         android:icon="@drawable/ic_item_heart"/>
 
     <item android:id="@+id/infoFragment"

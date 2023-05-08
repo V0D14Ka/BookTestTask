@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BookTestTask</string>
+    <string name="liketext">Если Вам нравится книга - свайпните вправо</string>
+    <string name="disliketext">Не интересно? Свайп влево и она исчезнет!</string>
+    <string name="alreadytext">Уже читали? Свайп вверх!</string>
+    <string name="skiptext">В раздумиях? Свайп вниз и мы предложим ее позже!</string>
 </resources>

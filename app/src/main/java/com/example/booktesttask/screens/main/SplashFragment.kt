@@ -30,7 +30,7 @@ class SplashFragment: Fragment(R.layout.fragment_splash) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val args = MainActivityArgs(isSignedIn)
         intent.putExtras(args.toBundle())
-        Handler().postDelayed({startActivity(intent)}, 5000)
+        Handler().postDelayed({startActivity(intent)}, 2000)
 //        startActivity(intent)
     }
 

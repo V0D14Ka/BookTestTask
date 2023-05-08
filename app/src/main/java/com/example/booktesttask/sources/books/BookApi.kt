@@ -15,16 +15,16 @@ interface BookApi {
     @GET("{id}")
     suspend fun getBook( @Path("id") id: Long): Book
 
-    @GET("{id}")
-    suspend fun like(@Path("id") id: Long) : Book
+    @GET("{id}/like")
+    suspend fun like(@Path("id") id: Long) : Unit
 
-    @GET("{id}")
-    suspend fun dislike(@Path("id") id: Long) : Book
+    @GET("{id}/dislike")
+    suspend fun dislike(@Path("id") id: Long) : Unit
 
-    @GET("{id}")
-    suspend fun alreadyRead(@Path("id") id: Long) : Book
+    @GET("{id}/already")
+    suspend fun alreadyRead(@Path("id") id: Long) : Unit
 
-    @GET("{id}")
-    suspend fun skip(@Path("id") id: Long) : Book
+    @GET("{id}/skip")
+    suspend fun skip(@Path("id") id: Long) : Unit
 
 }

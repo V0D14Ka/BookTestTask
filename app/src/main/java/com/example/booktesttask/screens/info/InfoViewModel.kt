@@ -31,7 +31,7 @@ class InfoViewModel(private val userRepository: UserRepository): ViewModel() {
 
     fun getUser() = viewModelScope.launch {
         showProgress()
-        delay(5000)
+        delay(1000)
         try {
             userRepository.getInfo()
             userRepository.addListener(listener)

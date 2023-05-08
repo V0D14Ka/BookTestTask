@@ -27,7 +27,7 @@ object SourceProviderHolder {
      */
     private fun createRetrofit(moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://95.154.68.102/api/")
+            .baseUrl("http://www.mocky.io/v2/")
             .client(createOkHttpClient())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -41,6 +41,7 @@ object SourceProviderHolder {
         return OkHttpClient.Builder()
             .addInterceptor(createAuthorizationInterceptor(SharedPreferencesAppSettings.get()))
             .addInterceptor(createLoggingInterceptor())
+            .addInterceptor(MockInterceptor())
             .build()
     }
 

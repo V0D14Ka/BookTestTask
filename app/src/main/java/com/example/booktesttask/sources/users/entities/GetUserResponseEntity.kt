@@ -5,17 +5,14 @@ import com.example.booktesttask.models.user.User
 data class GetUserResponseEntity(
     val Id: Long,
     val username: String,
-    val phone: String,
-    val avatar: String
+    val favorite_books: Array<String>?,
+    val already_read_books: Array<String>?,
 ) {
     fun toUser(): User = User(
-        email = null,
-        phone = phone,
-        favorite_books = null,
+        favorite_books = favorite_books,
         dislike_books = null,
-        already_read_books = null,
-        username = username,
-        id = Id,
-        avatar = avatar
+        already_read_books = already_read_books,
+        username = "username",
+        id = Id
     )
 }

@@ -21,7 +21,7 @@ class BookRepository private constructor(context: Context, private val bookSourc
     private fun offlineInit() {
         val faker = Faker.instance()
         IMAGES.shuffle()
-        books = (1..10).map {
+        books = (1..20).map {
             Book(
                 id = it.toLong(),
                 author = faker.book().author(),
@@ -112,7 +112,8 @@ class BookRepository private constructor(context: Context, private val bookSourc
 
     suspend fun getRecommendations() {
         try {
-            books = bookSource.getRecommendations().toMutableList()
+            offlineInit()
+//            books = bookSource.getRecommendations().toMutableList()
         } catch (e: Exception) {
 //            offlineInit()
             if (e is BackendException && e.code == 401) {

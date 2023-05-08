@@ -61,16 +61,14 @@ class UserRepository private constructor(context: Context,private val userSource
         _currentUser = User(
             id = 1,
             username = "Aboba",
-            email = "asd@mail.ru",
-            phone = "213123",
-            avatar = "asd",
             favorite_books = arrayOf("asd", "asd", "asdsa"),
             dislike_books = arrayOf("asd", "asd", "asdsa"),
             already_read_books = arrayOf("asd", "asd", "asdsa")
         )
     }
     suspend fun getInfo() {
-        offlineGetInfo()
+//        offlineGetInfo()
+        _currentUser = getAccount()
         notifyChanges()
     }
     suspend fun getAccount(): User = wrapBackendExceptions {

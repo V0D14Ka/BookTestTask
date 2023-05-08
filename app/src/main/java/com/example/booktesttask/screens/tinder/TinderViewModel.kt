@@ -46,7 +46,7 @@ class TinderViewModel (
 
     fun getRecommendations() = viewModelScope.launch {
         showProgress()
-        delay(2000)
+        delay(1000)
         try {
             bookRepository.getRecommendations()
         } catch (e: Exception) {

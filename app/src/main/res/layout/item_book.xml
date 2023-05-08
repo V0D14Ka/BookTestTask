@@ -60,7 +60,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_broken_heart"
+            android:src="@drawable/ic_dislike"
             android:layout_gravity="center"/>
 
     </FrameLayout>
@@ -88,7 +88,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_not_interested"
+            android:src="@drawable/ic_already_read"
             android:layout_gravity="center"/>
 
     </FrameLayout>
@@ -102,7 +102,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_already_read"
+            android:src="@drawable/ic_not_interested"
             android:layout_gravity="center"/>
 
     </FrameLayout>

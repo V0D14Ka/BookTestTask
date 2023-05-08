@@ -37,7 +37,7 @@ class RetrofitBookSource (
     }
 
     override suspend fun skip(id: Long): Unit = wrapRetrofitExceptions{
-        booksApi.alreadyRead(id)
+        booksApi.skip(id)
     }
 
 }

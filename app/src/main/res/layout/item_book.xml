@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:padding="16dp"
-        android:background="@color/black">
+        android:background="@drawable/gradation_black">
 
         <TextView
             android:id="@+id/item_name"
@@ -34,7 +34,7 @@
             android:textSize="26sp"/>
 
         <TextView
-            android:id="@+id/item_age"
+            android:id="@+id/item_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -42,7 +42,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/item_city"
+            android:id="@+id/item_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -55,12 +55,12 @@
         android:id="@+id/left_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@drawable/overlay_black">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@color/black"
+            android:src="@drawable/ic_broken_heart"
             android:layout_gravity="center"/>
 
     </FrameLayout>
@@ -69,12 +69,12 @@
         android:id="@+id/right_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@drawable/overlay_black">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@color/black"
+            android:src="@drawable/ic_item_heart"
             android:layout_gravity="center"/>
 
     </FrameLayout>
@@ -83,12 +83,12 @@
         android:id="@+id/top_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@drawable/overlay_black">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@color/black"
+            android:src="@drawable/ic_not_interested"
             android:layout_gravity="center"/>
 
     </FrameLayout>
@@ -97,12 +97,12 @@
         android:id="@+id/bottom_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@drawable/overlay_black">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@color/black"
+            android:src="@drawable/ic_already_read"
             android:layout_gravity="center"/>
 
     </FrameLayout>

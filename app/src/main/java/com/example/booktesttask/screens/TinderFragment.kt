@@ -1,6 +1,7 @@
 package com.example.booktesttask.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +11,25 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.example.booktesttask.R
 import com.example.booktesttask.databinding.FragmentTinderBinding
+import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.book.BookAdapter
 import com.example.booktesttask.utils.factory
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.Direction
+import com.yuyakaido.android.cardstackview.StackFrom
+import com.yuyakaido.android.cardstackview.SwipeableMethod
+import com.yuyakaido.android.cardstackview.internal.CardStackDataObserver
 
 class TinderFragment: Fragment() {
     private lateinit var binding: FragmentTinderBinding
     private lateinit var adapter: BookAdapter
     private lateinit var manager: CardStackLayoutManager
     private val viewModel: TinderViewModel by viewModels{ factory() }
+    private var item: Book? = null
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +44,8 @@ class TinderFragment: Fragment() {
 
             override fun onCardSwiped(direction: Direction?) {
                 viewModel.directionToast(context!!, direction!!)
-                if (manager.topPosition == viewModel.getSize()) {
-                    Toast.makeText(requireContext(), "Last card", Toast.LENGTH_SHORT).show()
-                }
+                viewModel.event(direction, item!!)
+                Toast.makeText(context, "Author ${item?.isLiked}, ${item?.id}", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCardRewound() {
@@ -51,6 +58,9 @@ class TinderFragment: Fragment() {
             }
 
             override fun onCardDisappeared(view: View?, position: Int) {
+                if (view != null) {
+                    item = view.tag as Book
+                }
             }
 
         })
@@ -58,6 +68,10 @@ class TinderFragment: Fragment() {
         manager.setVisibleCount(3)
         manager.setTranslationInterval(0.6f)
         manager.setScaleInterval(0.8f)
+        manager.setStackFrom(StackFrom.None)
+        manager.setSwipeThreshold(0.3f)
+        manager.setMaxDegree(20.0f)
+        manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setDirections(Direction.FREEDOM)
         binding.cardStackView.layoutManager = manager
         binding.cardStackView.adapter = adapter

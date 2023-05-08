@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.booktesttask.screens.InfoFragment"
+        android:label="Статистика" />
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.booktesttask.screens.StartFragment"
+        android:label="Приветствие" />
+    <fragment
+        android:id="@+id/tinderFragment"
+        android:name="com.example.booktesttask.screens.TinderFragment"
+        android:label="Рекомендации" />
+</navigation>

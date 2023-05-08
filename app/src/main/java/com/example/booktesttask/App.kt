@@ -1,34 +1,22 @@
 package com.example.booktesttask
 
+import android.app.Application
 import android.content.Context
 import com.example.booktesttask.models.book.BookRepository
 import com.example.booktesttask.models.book.BookSource
+import com.example.booktesttask.models.settings.SharedPreferencesAppSettings
+import com.example.booktesttask.models.user.UserRepository
+import com.example.booktesttask.sources.SourceProviderHolder
+import com.example.booktesttask.sources.SourcesProvider
 
-object App {
-
-    private lateinit var appContext: Context
-
-//    private val sourcesProvider: SourcesProvider by lazy {
-//        SourceProviderHolder.sourcesProvider
-//    }
-
-    // --- sources
-
-//    private val bookSource: BookSource by lazy {
-//        sourcesProvider.getBookSource()
-//    }
-
+class App : Application() {
+    private lateinit var sourcesProvider: SourcesProvider
     // --- repositories
-
-    val bookRepository: BookRepository by lazy {
-        BookRepository()
-    }
-
-    /**
-     * Call this method in all application components that may be created at app startup/restoring
-     * (e.g. in onCreate of activities and services)
-     */
-    fun init(appContext: Context) {
-        App.appContext = appContext
+    override fun onCreate() {
+        super.onCreate()
+        SharedPreferencesAppSettings.init(this)
+        sourcesProvider = SourceProviderHolder.sourcesProvider
+        BookRepository.init(this, sourcesProvider.getBookSource())
+        UserRepository.init(this)
     }
 }

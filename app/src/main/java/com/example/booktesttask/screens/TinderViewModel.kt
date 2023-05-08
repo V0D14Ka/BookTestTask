@@ -5,11 +5,13 @@ import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.book.BookListener
 import com.example.booktesttask.models.book.BookRepository
 import com.example.booktesttask.utils.share
 import com.yuyakaido.android.cardstackview.Direction
+import kotlinx.coroutines.launch
 
 class TinderViewModel (
     private val bookRepository: BookRepository
@@ -34,6 +36,13 @@ class TinderViewModel (
     }
     fun getSize(): Int {
         return _books.value?.size ?: 0
+    }
+
+    fun event(direction: Direction, item: Book) = viewModelScope.launch{
+        if (direction == Direction.Right) {
+            bookRepository.like(item)
+        }
+
     }
 
     data class State(

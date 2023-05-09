@@ -39,10 +39,12 @@ class InfoViewModel(private val userRepository: UserRepository): ViewModel() {
     }
 
     fun getTopGenres(): String {
-         val msg = if (user.value?.top?.get(0) != "0") {
-            """${user.value?.top?.get(0)}, ${user.value?.top?.get(1)}, ${user.value?.top?.get(2)}"""
-        }else "Нет информации"
-        return msg
+        var msg = ""
+        user.value?.top?.forEach {
+            msg += it
+            msg += """, """
+        }
+        return msg.removeSuffix(", ")
     }
 
     fun getShareInfo(): String {

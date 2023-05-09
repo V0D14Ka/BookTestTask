@@ -62,42 +62,41 @@ class Mock {
         return res
     }
     private fun makeAnswer() {
-        val abo = mutableListOf<Pair<String, Int>>()
+        val sorted = mutableListOf<Pair<String, Int>>()
+
         favorite_books.forEach{
-            answer += """""""
-            answer += it
-            answer += """","""
+            answer += """"$it","""
         }
         answer = answer.removeSuffix(",")
         answer+= """],"already_read_books":[ """
+
         already_read_books.forEach{
-            answer += """""""
-            answer += it
-            answer += """","""
+            answer += """"$it","""
         }
         answer = answer.removeSuffix(",")
         answer+= """], "top": ["""
 
-        var check = 0
-        genres.forEach { check += it }
-
-        if (check != 0) {
-            var cur = 0
-            genres.forEach {
-                abo.add(Pair(GENRES[cur], it))
-                cur += 1
+        var unique = 0
+        genres.forEach {
+            if (it != 0) {
+                unique += 1
             }
-            abo.sortByDescending { it.second }
-            abo.forEach {
-                answer += """""""
-                answer += it.first
-                answer += """","""
-            }
-            answer = answer.removeSuffix(",")
-            answer+= """]}"""
-            return
         }
-        answer+= """"0"]}"""
+
+        var cur = 0
+        genres.forEach {
+            sorted.add(Pair(GENRES[cur], it))
+            cur += 1
+        }
+        sorted.sortByDescending { it.second }
+
+        when (unique) {
+            0 -> answer += """"0"]}"""
+            1 -> answer += """"${sorted[0].first}"]}"""
+            2 -> answer += """"${sorted[0].first}", "${sorted[1].first}"]}"""
+            else -> answer += """"${sorted[0].first}","${sorted[1].first}","${sorted[2].first}"]}"""
+        }
+
     }
 
     fun offlineInit(): String {

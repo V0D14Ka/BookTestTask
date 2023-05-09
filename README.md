@@ -8,8 +8,13 @@ Android приложение на языке Kotlin в рамках тестов
 
 Функционал:
 Книжный тиндер. 
-![Image alt](https://github.com/V0D14Ka/BookTestTask/blob/master/recommendations.jpg)
+
+![Screenshot](https://github.com/V0D14Ka/BookTestTask/blob/master/recommendations.jpg)
+
 Статистика аккаунта с возможностью поделиться.
-![Image alt](https://github.com/V0D14Ka/BookTestTask/blob/master/stats.jpg)
+
+![Screenshot](https://github.com/V0D14Ka/BookTestTask/blob/master/stats.jpg)
+
 Обратная связь с разработчиком.
-![Image alt](https://github.com/V0D14Ka/BookTestTask/blob/master/feedback.jpg)
+
+![Screenshot](https://github.com/V0D14Ka/BookTestTask/blob/master/feedback.jpg)

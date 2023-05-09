@@ -3,7 +3,6 @@ package com.example.booktesttask.screens.info
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.user.InfoListener
 import com.example.booktesttask.models.user.User
 import com.example.booktesttask.models.user.UserRepository
@@ -25,10 +24,6 @@ class InfoViewModel(private val userRepository: UserRepository): ViewModel() {
         _user.value = it
     }
 
-    init {
-        getUser()
-    }
-
     fun getUser() = viewModelScope.launch {
         showProgress()
         delay(500)
@@ -41,6 +36,19 @@ class InfoViewModel(private val userRepository: UserRepository): ViewModel() {
         finally {
             hideProgress()
         }
+    }
+
+    fun getTopGenres(): String {
+         val msg = if (user.value?.top?.get(0) != "0") {
+            """${user.value?.top?.get(0)}, ${user.value?.top?.get(1)}, ${user.value?.top?.get(2)}"""
+        }else "Нет информации"
+        return msg
+    }
+
+    fun getShareInfo(): String {
+        return """Моя статистика: ${user.value?.already_read_books?.size.toString()} книг прочитано, 
+                |${user.value?.favorite_books?.size.toString()} книг понравилось. Топ 3 жанра: 
+                |${getTopGenres()} """.trimMargin()
     }
 
     private fun showProgress() {

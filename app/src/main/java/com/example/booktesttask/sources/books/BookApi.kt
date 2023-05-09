@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface BookApi {
 
-    @GET("")
+    @GET("getrecommendations")
     suspend fun getRecommendations(): List<Book>
 
     @POST("{list}")

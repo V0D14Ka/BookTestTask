@@ -50,15 +50,4 @@ class BookAdapter (
             }
         }
     }
-//    override fun onClick(v: View) {
-//        val post = v.tag as Book
-//        when(v.id) {
-//            R.id.moreImageViewButton -> {
-//                actionListener.onPostFavorite(post)
-//            }
-//            else -> {
-//                actionListener.onPostDetails(post)
-//            }
-//        }
-//    }
 }

@@ -18,24 +18,6 @@ class BookRepository private constructor(context: Context, private val bookSourc
     private val listeners = mutableListOf<BookListener>()
     private val genres = mutableListOf<String>()
 
-    private fun offlineInit() {
-        val faker = Faker.instance()
-        IMAGES.shuffle()
-        books = (1..20).map {
-            Book(
-                id = it.toLong(),
-                author = faker.book().author(),
-                price = 123,
-                description = faker.lorem().characters(),
-                name = faker.book().title(),
-                genre = faker.book().genre(),
-                preview = IMAGES[it % IMAGES.size],
-                isLiked = false,
-                isRead = false
-            )
-        }.toMutableList()
-    }
-
     fun addListener(listener: BookListener){
         listeners.add(listener)
         listener.invoke(books)
@@ -112,10 +94,8 @@ class BookRepository private constructor(context: Context, private val bookSourc
 
     suspend fun getRecommendations() {
         try {
-            offlineInit()
-//            books = bookSource.getRecommendations().toMutableList()
+            books = bookSource.getRecommendations().toMutableList()
         } catch (e: Exception) {
-//            offlineInit()
             if (e is BackendException && e.code == 401) {
                 throw InvalidCredentialsException(e)
             }
@@ -181,13 +161,6 @@ class BookRepository private constructor(context: Context, private val bookSourc
     }
 
     companion object {
-        private val IMAGES = mutableListOf(
-            "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-            "https://images.unsplash.com/photo-1576872381149-7847515ce5d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80",
-            "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-            "https://images.unsplash.com/photo-1543497415-75c0a27177c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80"
-        )
-
         private var INSTANCE: BookRepository? = null
 
         fun init(context: Context, source: BookSource) {

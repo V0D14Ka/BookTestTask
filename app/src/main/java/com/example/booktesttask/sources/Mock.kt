@@ -1,8 +1,10 @@
 package com.example.booktesttask.sources
 
+import android.util.Log
 import com.example.booktesttask.models.book.Book
 import com.example.booktesttask.models.book.BookRepository
 import com.github.javafaker.Faker
+import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Protocol
@@ -11,13 +13,17 @@ import okhttp3.ResponseBody
 
 class Mock {
     private var books = mutableListOf<Book>()
-    private val id: Long = 1
-    private val username: String = "aboba"
     private var favorite_books = mutableListOf<String>()
     private var already_read_books = mutableListOf<String>()
+    private val GENRES = mutableListOf(
+        "Сказка",
+        "Повесть",
+        "Роман",
+        "Детектив",
+        "Фантастика"
+    )
+    private var genres = Array<Int>(GENRES.size){0}
     private var answer: String = """{"id":1, "username": "aboba", "favorite_books":[ """
-    private var answ: String = ""
-
     private val IMAGES = mutableListOf(
         "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
         "https://images.unsplash.com/photo-1576872381149-7847515ce5d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80",
@@ -26,58 +32,91 @@ class Mock {
     )
 
 
-    fun like(): String {
+    fun addFavoriteGenre(id: Long) {
+        var current = 0
+        GENRES.forEach {
+            val g = books[id.toInt()-1].genre
+            if (it == g) {
+                genres[current] += 1
+            }
+            current+=1
+        }
+    }
+
+    fun like(id: Long): String {
         favorite_books.add("+")
+        addFavoriteGenre(id)
         return "+"
     }
 
-    fun already(): String {
+    fun already(id: Long): String {
         already_read_books.add("+")
+        addFavoriteGenre(id)
         return "+"
     }
 
-    fun get_answer() : String{
+    fun getAnswer() : String{
         makeAnswer()
         val res = answer
         answer = """{"id":1, "username": "aboba", "favorite_books":["""
         return res
     }
     private fun makeAnswer() {
+        val abo = mutableListOf<Pair<String, Int>>()
         favorite_books.forEach{
             answer += """""""
             answer += it
-            answer += """""""
-            answer += ","
+            answer += """","""
         }
         answer = answer.removeSuffix(",")
         answer+= """],"already_read_books":[ """
         already_read_books.forEach{
             answer += """""""
             answer += it
-            answer += """""""
-            answer += ","
+            answer += """","""
         }
         answer = answer.removeSuffix(",")
-        answer+= """]}"""
+        answer+= """], "top": ["""
+
+        var check = 0
+        genres.forEach { check += it }
+
+        if (check != 0) {
+            var cur = 0
+            genres.forEach {
+                abo.add(Pair(GENRES[cur], it))
+                cur += 1
+            }
+            abo.sortByDescending { it.second }
+            abo.forEach {
+                answer += """""""
+                answer += it.first
+                answer += """","""
+            }
+            answer = answer.removeSuffix(",")
+            answer+= """]}"""
+            return
+        }
+        answer+= """"0"]}"""
     }
 
-    fun offlineInit(): String  {
+    fun offlineInit(): String {
         val faker = Faker.instance()
         IMAGES.shuffle()
-        books = (1..10).map {
+        books = (1..20).map {
             Book(
                 id = it.toLong(),
                 author = faker.book().author(),
                 price = 123,
                 description = faker.lorem().characters(),
                 name = faker.book().title(),
-                genre = faker.book().genre(),
+                genre = GENRES[it % GENRES.size],
                 preview = IMAGES[it % IMAGES.size],
                 isLiked = false,
                 isRead = false
             )
         }.toMutableList()
-        return "+"
+        return Gson().toJson(books)
     }
 }
 
@@ -87,11 +126,16 @@ class MockInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val uri = chain.request().url().uri().toString()
         val responseString = when {
-            uri.endsWith("login") -> mock.get_answer()
+            uri.endsWith("login") -> mock.getAnswer()
             uri.endsWith("dislike") -> "+"
-            uri.endsWith("like") ->  mock.like()
-            uri.endsWith("already") ->  mock.already()
+            uri.endsWith("like") ->  {
+                val id = uri.removeSuffix("/like").removePrefix("http://www.mocky.io/v2/").toLong()
+                mock.like(id)}
+            uri.endsWith("already") ->  {
+                val id = uri.removeSuffix("/already").removePrefix("http://www.mocky.io/v2/").toLong()
+                mock.already(id)}
             uri.endsWith("skip") ->  "+"
+            uri.endsWith("getrecommendations") ->  mock.offlineInit()
             else  -> ""
         }
         return chain.proceed(chain.request())

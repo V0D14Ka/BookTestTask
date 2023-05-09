@@ -8,16 +8,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="157dp">
+
         <TextView
             android:id="@+id/textliked"
-            android:text="Понравились"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="156dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="18sp"
+            android:text="Понравились"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.232"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +31,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Уже читали"
             android:fontFamily="sans-serif-medium"
-            android:textSize="18sp"
+            android:text="Уже читали"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.232"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,10 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Топ-3 жанра"
             android:fontFamily="sans-serif-medium"
-            android:textSize="18sp"
+            android:text="Топ-3 жанра"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.232"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,10 +59,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
-            android:text="Статистика"
             android:fontFamily="sans-serif-medium"
-            android:textSize="30sp"
+            android:text="Статистика"
             android:textColor="@android:color/holo_red_light"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,40 +73,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            tools:text="12"
             android:fontFamily="sans-serif-medium"
-            android:textSize="18sp"
             android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/textliked"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/textliked"
             app:layout_constraintTop_toTopOf="@+id/textliked"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="12" />
 
         <TextView
             android:id="@+id/readcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="12"
             android:fontFamily="sans-serif-medium"
-            android:textSize="18sp"
             android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/textalreadyread"
             app:layout_constraintEnd_toEndOf="@id/likedcount"
             app:layout_constraintTop_toTopOf="@id/textalreadyread"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="12" />
 
         <TextView
             android:id="@+id/topgenres"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
+            android:text="В разработке"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/texttopgenres"
             app:layout_constraintStart_toStartOf="@+id/readcount"
-            app:layout_constraintTop_toTopOf="@id/texttopgenres"
-            android:text="В разработке" />
+            app:layout_constraintTop_toTopOf="@id/texttopgenres" />
 
         <Button
             android:id="@+id/ShareButton"

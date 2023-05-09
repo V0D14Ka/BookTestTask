@@ -57,17 +57,7 @@ class UserRepository private constructor(context: Context,private val userSource
         appSettings.setCurrentToken(null)
     }
 
-    fun offlineGetInfo() {
-        _currentUser = User(
-            id = 1,
-            username = "Aboba",
-            favorite_books = arrayOf("asd", "asd", "asdsa"),
-            dislike_books = arrayOf("asd", "asd", "asdsa"),
-            already_read_books = arrayOf("asd", "asd", "asdsa")
-        )
-    }
     suspend fun getInfo() {
-//        offlineGetInfo()
         _currentUser = getAccount()
         notifyChanges()
     }

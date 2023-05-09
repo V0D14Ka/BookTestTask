@@ -23,6 +23,10 @@ class BookRepository private constructor(context: Context, private val bookSourc
         listener.invoke(books)
     }
 
+    fun removeListener(listener: BookListener){
+        listeners.remove(listener)
+    }
+
     suspend fun like(item: Book) {
         deleteBook(item)
         notifyChanges()

@@ -4,6 +4,7 @@ import com.example.booktesttask.models.user.User
 import com.example.booktesttask.models.user.UserSource
 import com.example.booktesttask.sources.base.BaseRetrofitSource
 import com.example.booktesttask.sources.base.RetrofitConfig
+import com.example.booktesttask.sources.users.entities.FeedbackRequestEntity
 import com.example.booktesttask.sources.users.entities.SignInRequestEntity
 
 class RetrofitUsersSource (
@@ -24,6 +25,14 @@ class RetrofitUsersSource (
 
     override suspend fun getUser(): User = wrapRetrofitExceptions {
         usersApi.getUser().toUser()
+    }
+
+    override suspend fun feedback(email: String, msg: String) = wrapRetrofitExceptions{
+        val feedbackRequestEntity = FeedbackRequestEntity(
+            email = email,
+            message = msg
+        )
+        usersApi.feedback(feedbackRequestEntity)
     }
 
 }

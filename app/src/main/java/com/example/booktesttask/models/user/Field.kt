@@ -4,5 +4,6 @@ enum class Field {
     Username,
     Email,
     Password,
-    Phone
+    Phone,
+    Message
 }

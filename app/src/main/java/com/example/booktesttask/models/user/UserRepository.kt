@@ -24,6 +24,11 @@ class UserRepository private constructor(context: Context,private val userSource
         listeners.add(listener)
         listener.invoke(_currentUser!!)
     }
+
+    fun removeListener(listener: InfoListener){
+        listeners.remove(listener)
+    }
+
     private fun notifyChanges(){
         listeners.forEach { it.invoke(_currentUser!!) }
     }
@@ -31,6 +36,18 @@ class UserRepository private constructor(context: Context,private val userSource
         // user is signed-in if auth token exists
         return appSettings.getCurrentToken() != null
     }
+
+    suspend fun feedback(email: String, msg: String) {
+        if (email.isBlank()) throw EmptyFieldException(Field.Email)
+        if (msg.isBlank()) throw EmptyFieldException(Field.Message)
+
+        try {
+            userSource.feedback(email, msg)
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
     suspend fun signIn(username: String, password: String) {
         if (username.isBlank()) throw EmptyFieldException(Field.Email)
         if (password.isBlank()) throw EmptyFieldException(Field.Password)

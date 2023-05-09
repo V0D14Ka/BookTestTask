@@ -87,6 +87,11 @@ class TinderViewModel (
         _state.value = _state.requireValue().copy(apiFail = true)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        bookRepository.removeListener(listener)
+    }
+
     data class State(
         val getBookInProgress: Boolean = false,
         val emptyList: Boolean = false,

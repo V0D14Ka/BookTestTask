@@ -135,7 +135,7 @@ class MockInterceptor : Interceptor {
                 mock.already(id)}
             uri.endsWith("skip") ->  "+"
             uri.endsWith("getrecommendations") ->  mock.offlineInit()
-            else  -> ""
+            else  -> "+"
         }
         return chain.proceed(chain.request())
             .newBuilder()

@@ -1,5 +1,7 @@
 package com.example.booktesttask.sources.users
 
+import android.provider.ContactsContract.CommonDataKinds.Email
+import com.example.booktesttask.sources.users.entities.FeedbackRequestEntity
 import com.example.booktesttask.sources.users.entities.GetUserResponseEntity
 import com.example.booktesttask.sources.users.entities.SignInRequestEntity
 import com.example.booktesttask.sources.users.entities.SignInResponseEntity
@@ -16,5 +18,8 @@ interface UsersApi {
 
     @GET("login")
     suspend fun getUser(): GetUserResponseEntity
+
+    @POST("feedback")
+    suspend fun feedback(@Body feedbackRequestEntity: FeedbackRequestEntity): Unit
 
 }

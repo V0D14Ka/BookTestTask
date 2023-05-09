@@ -7,21 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.booktesttask.databinding.FragmentInfoBinding
-import com.example.booktesttask.models.user.User
 import com.example.booktesttask.utils.factory
 
 class InfoFragment: Fragment() {
     private lateinit var binding: FragmentInfoBinding
     private val viewModel: InfoViewModel by viewModels{ factory() }
-    private var user: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel.getUser()
         binding = FragmentInfoBinding.inflate(inflater, container, false)
         binding.tryAgainButton.setOnClickListener{ viewModel.getUser()}

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -31,7 +30,7 @@ class TinderFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTinderBinding.inflate(inflater, container, false)
         binding.tryAgainButton.setOnClickListener{ viewModel.getRecommendations() }
         adapter = BookAdapter()
@@ -40,9 +39,10 @@ class TinderFragment: Fragment() {
             }
 
             override fun onCardSwiped(direction: Direction?) {
-                viewModel.directionToast(context!!, direction!!)
-                viewModel.event(direction, item!!)
-//                Toast.makeText(context, "Author ${item?.isLiked}, ${item?.id}", Toast.LENGTH_SHORT).show()
+//                viewModel.directionToast(context!!, direction!!)
+                if (direction != null) {
+                    viewModel.event(direction, item!!)
+                }
             }
 
             override fun onCardRewound() {

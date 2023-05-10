@@ -42,11 +42,11 @@ class BookAdapter (
             if(item.preview.isNotBlank()) {
                 Glide.with(itemImage)
                     .load(item.preview)
-                    .placeholder(R.drawable.ic_image)
-                    .error(R.drawable.ic_image)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
                     .into(itemImage)
             }else {
-                itemImage.setImageResource(R.drawable.ic_image)
+                itemImage.setImageResource(R.drawable.ic_launcher_background)
             }
         }
     }

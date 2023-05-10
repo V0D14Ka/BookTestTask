@@ -16,7 +16,7 @@ interface UsersApi {
         @Body signInRequestEntity: SignInRequestEntity
     ): SignInResponseEntity
 
-    @GET("login")
+    @GET("getinfo")
     suspend fun getUser(): GetUserResponseEntity
 
     @POST("feedback")

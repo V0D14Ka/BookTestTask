@@ -125,7 +125,7 @@ class MockInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val uri = chain.request().url().uri().toString()
         val responseString = when {
-            uri.endsWith("login") -> mock.getAnswer()
+            uri.endsWith("getinfo") -> mock.getAnswer()
             uri.endsWith("dislike") -> "+"
             uri.endsWith("like") ->  {
                 val id = uri.removeSuffix("/like").removePrefix("http://www.mocky.io/v2/").toLong()

@@ -68,9 +68,15 @@ class TinderViewModel (
             } else {
                 bookRepository.skip(item)
             }
+            checkBooks()
         } catch (e: Exception) {
             bookRepository.addBook(item)
         }
+    }
+
+    private fun checkBooks() {
+        if (_books.value.isNullOrEmpty())
+            _state.value = _state.requireValue().copy(emptyList = true)
     }
 
     private fun showProgress() {

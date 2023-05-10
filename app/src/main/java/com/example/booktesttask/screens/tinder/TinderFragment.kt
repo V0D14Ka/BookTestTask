@@ -33,6 +33,7 @@ class TinderFragment: Fragment() {
     ): View {
         binding = FragmentTinderBinding.inflate(inflater, container, false)
         binding.tryAgainButton.setOnClickListener{ viewModel.getRecommendations() }
+        binding.newload.setOnClickListener { viewModel.getRecommendations() }
         adapter = BookAdapter()
         manager = CardStackLayoutManager(requireContext(), object: CardStackListener{
             override fun onCardDragging(direction: Direction?, ratio: Float) {
@@ -85,7 +86,7 @@ class TinderFragment: Fragment() {
 
     private fun observeState() = viewModel.state.observe(viewLifecycleOwner) {
         binding.tryAgainContainer.visibility = if(it.apiFailInfo) View.VISIBLE else View.INVISIBLE
-//        binding.noUsersTextView.visibility = if(it.emptyList && !it.apiFailInfo) View.VISIBLE else View.INVISIBLE
+        binding.noBooksContainer.visibility = if(it.emptyList && !it.apiFailInfo) View.VISIBLE else View.INVISIBLE
         binding.progressBar.visibility = if (it.showProgress) View.VISIBLE else View.INVISIBLE
     }
 }
